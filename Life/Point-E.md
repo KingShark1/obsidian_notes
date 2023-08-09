@@ -41,11 +41,22 @@ Several million 3D models and associated metadata. We process the dataset into r
 
 By constructing point clouds directly from renders, we were able to sidestep various issues that might arise from attempting to sample points directly from 3D meshes, such as sampling points which are contained within the model or dealing with 3D models that are stored in unusual file formats.
 
-NOTE: I want to have information about the internal points as well.
+_NOTE_: **I want to have information about the internal points as well.**
 
 ---
-
-# IDEAS: 
+## Results
+- Using single CLIP embedding to condition on images is worse than using a grid of embeddings, meaning the that the point cloud model benefits from seeing (spatial) information from the conditioning image.
+- Sometimes 
+	1. the model incorrectly interprets the shape of the object depicted in the image.
+	2. The model incorrectly infers some parts of shape that is occluded in the image.
+- 
+---
+## IDEAS: 
 - Use the output, 1k points from 3 different angles and then use the same merger like architecture to create a better 3d 1k cloud, and then use the upsampler to generate a 4k cloud!
 - Preferably segment the interiors when generating the image, and use that segmented data to create the finally merged output
 - I can use a transformer based technique rather than merger, as it would hopefully connect the relations between different cloud points.
+
+---
+## Questions:
+1. How are ViT-L/14 CLIP model's last layer embedding $(256*D')$ are **Linearly Projected** to another tensor of shape $256*D$?
+2. How to employ positional encodings to generate model with more views?

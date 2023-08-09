@@ -74,7 +74,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -157,12 +157,12 @@
       "obsidian-map-view:Open map view": false
     }
   },
-  "active": "6801e9bf032bb8c4",
+  "active": "1a82bc6b475b4f56",
   "lastOpenFiles": [
-    "Pasted image 20230805170346.png",
-    "Pasted image 20230805151929.png",
     "GET3D.md",
     "Point-E.md",
+    "Pasted image 20230805170346.png",
+    "Pasted image 20230805151929.png",
     "Untitled.md",
     "Pasted image 20230803150017.png",
     "discriminator.md",
