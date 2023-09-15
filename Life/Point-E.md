@@ -41,6 +41,17 @@ Several million 3D models and associated metadata. We process the dataset into r
 
 By constructing point clouds directly from renders, we were able to sidestep various issues that might arise from attempting to sample points directly from 3D meshes, such as sampling points which are contained within the model or dealing with 3D models that are stored in unusual file formats.
 
+- **RGBAD Images**:
+    
+    - The RGBAD images contain color information (R, G, B), depth information (D), and transparency information (A) for each pixel in the image.
+    - The color information provides the visual appearance of the 3D model.
+    - The depth information indicates the distance from the camera to each pixel, allowing for the reconstruction of the 3D shape.
+    - The transparency information helps to account for transparency effects, like glass surfaces.
+- **Creating a Dense Point Cloud**:
+    
+    - For each RGBAD image, the process involves creating a point cloud by using the depth information.
+    - Each pixel's depth value is used to calculate the 3D position of a point in space relative to the camera's viewpoint.
+    - The RGB color value of the pixel is assigned to the generated point, providing its visual color.
 _NOTE_: **I want to have information about the internal points as well.**
 
 ---
@@ -55,7 +66,9 @@ _NOTE_: **I want to have information about the internal points as well.**
 - Use the output, 1k points from 3 different angles and then use the same merger like architecture to create a better 3d 1k cloud, and then use the upsampler to generate a 4k cloud!
 - Preferably segment the interiors when generating the image, and use that segmented data to create the finally merged output
 - I can use a transformer based technique rather than merger, as it would hopefully connect the relations between different cloud points.
-
+- **Concatenation of Embeddings**: If the multiple images of the same object represent different perspectives or features, you can concatenate the embeddings of these images along a specific axis (e.g., feature axis). This will result in a new tensor that encapsulates the information from all angles. Depending on the transformer model's capacity, you may need to add additional linear layers to adjust the dimensions to match your existing architecture.
+- **Multi-View Encoding**: Design a specific multi-view encoding mechanism that takes into account the spatial relationship between different views. This could involve 3D transformations or specialized layers designed to integrate information across different perspectives. You can then feed this integrated representation into your existing model.
+- **Sequential Feeding**: If the temporal relationship between different angles is important, you can feed the images sequentially into the transformer, treating them as a sequence of observations. You may also include angle or perspective information as additional features.
 ---
 ## Questions:
 1. How are ViT-L/14 CLIP model's last layer embedding $(256*D')$ are **Linearly Projected** to another tensor of shape $256*D$?
